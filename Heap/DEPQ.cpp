@@ -7,7 +7,7 @@
 //Double-Ended priority queue
 //�Ȃ炵O(log n)
 template<class T>
-class MinMaxHeap{
+class DEPQ{
 	mutable std::priority_queue<T,std::vector<T>,greater<T> > minheap,mindel;	
 	mutable std::priority_queue<T,std::vector<T>,less<T> > maxheap,maxdel;
 public:
@@ -42,8 +42,8 @@ public:
 
 
 class MiddleHeap{
-	MinMaxHeap<int> higher;	
-	MinMaxHeap<int> lower;
+	DEPQ<int> higher;	
+	DEPQ<int> lower;
 	int nlow,nhigh;
 	void balance(){
 		while(nlow+1<nhigh){

@@ -6,7 +6,7 @@ using namespace std;
 #define INF (1<<30)
 
 
-class DynamixRMQ{//–§ver AVLTree
+class DynamicRMQ{//–§ver AVLTree
 	struct Node{
 		int height;
 		Node *left,*right;
@@ -135,8 +135,8 @@ class DynamixRMQ{//–§ver AVLTree
 		}
 	} *root;
 public:
-	DynamixRMQ():root(0){}
-	~DynamixRMQ(){if(root)delete root;}
+	DynamicRMQ():root(0){}
+	~DynamicRMQ(){if(root)delete root;}
 	void insert(int k,int v){
 		root=root->insert(k,v);
 	}
