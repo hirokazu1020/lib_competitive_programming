@@ -6,7 +6,7 @@ using namespace std;
 #define INF (1<<30)
 
 
-class DynamicRMQ{//–§ver AVLTree
+class DynamicRMQ{//å¯†ver AVLTree
 	struct Node{
 		int height;
 		Node *left,*right;
@@ -147,7 +147,7 @@ public:
 		root=root->erase(k);
 		root=root->insert(k,v);
 	}	
-	int min(int a,int b)const{//”¼ŠJ‹æŠÔ[a,b)
+	int min(int a,int b)const{//åŠé–‹åŒºé–“[a,b)
 		return root->min(a,b,0,root->size);
 	}
 };

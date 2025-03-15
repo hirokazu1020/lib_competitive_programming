@@ -9,8 +9,8 @@ unsigned int xor128(){
 	return w=(w^(w>>19))^(t^(t>>8));
 }
 
-//—vverify
-//‘}“üíœ‚ğƒTƒ|[ƒg‚·‚é“®“I‚È—ñ
+//è¦verify
+//æŒ¿å…¥å‰Šé™¤ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å‹•çš„ãªåˆ—
 template<class Val>
 class TreapArray{
 	struct Node{
@@ -61,7 +61,7 @@ class TreapArray{
 			return b->updates();
 		}
 	}
-	static std::pair<Node*,Node*> split(Node *a,int k){//[0,k),[k..)‚É•ªŠ„
+	static std::pair<Node*,Node*> split(Node *a,int k){//[0,k),[k..)ã«åˆ†å‰²
 		if(!a)return std::make_pair((Node*)NULL,(Node*)NULL);
 		int sz=a->left?a->left->size:0;
 		if(k > sz){
@@ -92,7 +92,7 @@ public:
 		std::pair<Node*,Node*> p=split(root,k);
 		root=merge(p.first,merge(new Node(v),p.second));
 	}
-	void merge(TreapArray &a){//*this‚Æa‚ğ‡•¹
+	void merge(TreapArray &a){//*thisã¨aã‚’åˆä½µ
 		root=merge(root,a.root);
 	}
 	void erase(int k){
@@ -102,7 +102,7 @@ public:
 		delete q.first;
 		root=merge(p.first,q.second);
 	}
-	void split(std::pair<TreapArray,TreapArray> &res, int k){//[0,k),[k..)‚É•ªŠ„
+	void split(std::pair<TreapArray,TreapArray> &res, int k){//[0,k),[k..)ã«åˆ†å‰²
 		pair<Node*,Node*> a=split(root,k);
 		root=0;
 		if(res.first.root)res.first.root->~Node();

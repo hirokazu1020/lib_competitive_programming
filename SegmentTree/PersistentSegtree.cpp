@@ -41,10 +41,10 @@ public:
 	PersistentSegtree(int n):n(n){
 		root=build(0,n);
 	}
-	int query(int a,int b)const{//[a,b)‚Ì˜a
+	int query(int a,int b)const{//[a,b)ã®å’Œ
 		return query(a,b,0,n,root);
 	}
-	PersistentSegtree* changequery(int k,int x){//k‚Éx‚ğ‰ÁZ
+	PersistentSegtree* changequery(int k,int x){//kã«xã‚’åŠ ç®—
 		return new PersistentSegtree(n,changequery(k,x,0,n,root));
 	}
 };

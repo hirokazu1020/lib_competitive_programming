@@ -2,7 +2,7 @@
 #include<vector>
 #include<algorithm>
 
-struct RangeAddTree{//”ÍˆÍ‰ÁZA”ÍˆÍ˜a
+struct RangeAddTree{//ç¯„å›²åŠ ç®—ã€ç¯„å›²å’Œ
 	int n;
 	std::vector<long long> sub,uni;
 	void add(int a,int b,int x,int k,int l,int r){
@@ -36,10 +36,10 @@ public:
 		sub.assign(2*n-1,0);
 		uni.assign(2*n-1,0);
 	}
-	void add(int a,int b,int x){//[a,b)‚Éx‚ğ‰ÁZ
+	void add(int a,int b,int x){//[a,b)ã«xã‚’åŠ ç®—
 		add(a,b,x,0,0,n);
 	}
-	long long get(int a,int b)const{//[a,b)‚Ì˜a
+	long long get(int a,int b)const{//[a,b)ã®å’Œ
 		return get(a,b,0,0,n);
 	}
 };

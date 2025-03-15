@@ -23,7 +23,7 @@ vector<int> topologicalSort(int v,const vector<int> edge[]){
 
 
 
-//«‘‡ƒgƒ|ƒƒWƒJƒ‹ƒ\[ƒg —vverify
+//è¾æ›¸é †ãƒˆãƒãƒ­ã‚¸ã‚«ãƒ«ã‚½ãƒ¼ãƒˆ è¦verify
 #include<set>
 #include<utiliry>
 Val val[MAX_V];

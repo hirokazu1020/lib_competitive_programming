@@ -12,14 +12,14 @@ class RMQ{//RangeMinimum(Maximum)Query
 		return std::min(query(a,b,k*2+1,l,(l+r)/2),query(a,b,k*2+2,(l+r)/2,r),T());
 	}
 public:
-	RMQ(int n=1<<20):n(n){//ƒTƒCƒY‚Í2‚Ì‚×‚«æ‚É‚µ‚½‚Ù‚¤‚ª‘¬‚¢
+	RMQ(int n=1<<20):n(n){//ã‚µã‚¤ã‚ºã¯2ã®ã¹ãä¹—ã«ã—ãŸã»ã†ãŒé€Ÿã„
 		dat=new S[2*n-1];
 		for(int i=0;i<2*n-1;i++)dat[i]=nil;
 	}
 	~RMQ(){
 		delete[] dat;
 	}
-	void update(int k,S a){//k”Ô–Ú‚ğa‚É•ÏX
+	void update(int k,S a){//kç•ªç›®ã‚’aã«å¤‰æ›´
 		k+=n-1;
 		dat[k]=a;
 		while(k>0){
@@ -27,7 +27,7 @@ public:
 			dat[k]=std::min(dat[k*2+1],dat[k*2+2],T());
 		}
 	}
-	S query(int a,int b)const{//[a,b)‚ÌÅ¬(‘å)’l
+	S query(int a,int b)const{//[a,b)ã®æœ€å°(å¤§)å€¤
 		return query(a,b,0,0,n);
 	}
 };

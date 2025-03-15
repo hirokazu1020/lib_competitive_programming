@@ -21,7 +21,7 @@ int highest_pop(unsigned int b){
 #endif
 }
 
-//‹Á‚«‚Ì32•ª–Ø ‘¬‚­‚Äƒƒ‚ƒŠ‚à­‚È‚­‚ÄÀ‘•‚à’Z‚­‚Ä‘f“G
+//é©šãã®32åˆ†æœ¨ é€Ÿãã¦ãƒ¡ãƒ¢ãƒªã‚‚å°‘ãªãã¦å®Ÿè£…ã‚‚çŸ­ãã¦ç´ æ•µ
 template<int U=30> 
 class Set{
 	unsigned int summary;

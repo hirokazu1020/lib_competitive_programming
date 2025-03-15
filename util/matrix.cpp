@@ -84,7 +84,7 @@ public:
 	}
 };
 
-long long fibonacchi(int k){//k+1番目のフィボナッチ数
+long long fibonacchi(int k){//k+1逡ｪ逶ｮ縺ｮ繝輔ぅ繝懊リ繝�繝∵焚
 	Matrix<> mat(2,2),a(1,2);
 	mat[0][0]=1;mat[0][1]=1;
 	mat[1][0]=1;mat[1][1]=0;

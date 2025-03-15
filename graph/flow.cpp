@@ -1,6 +1,6 @@
-//二部マッチング O(VE)
+//莠碁Κ繝槭ャ繝√Φ繧ｰ O(VE)
 #define N 500
-vector<vector<int> > edge,edge_rev;//正辺,逆辺
+vector<vector<int> > edge,edge_rev;//豁｣霎ｺ,騾�霎ｺ
 namespace Match{
 	bool match[N];
 	bool flow[N][N];

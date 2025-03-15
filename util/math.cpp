@@ -3,7 +3,7 @@
 #include<algorithm>
 using namespace std;
 
-//Å‘åŒö–ñ” O(log max(a,b))@<algorithm>‚É__gcd(a,b)
+//æœ€å¤§å…¬ç´„æ•° O(log max(a,b))ã€€<algorithm>ã«__gcd(a,b)
 int gcd(int a,int b){
 	if(b==0)return a;
 	return gcd(b,a%b);
@@ -12,7 +12,7 @@ long gcd(long a,long b){
 	if(b==0)return a;
 	return gcd(b,a%b);
 }
-//©g‚ğœ‚­–ñ”‚Ì˜a
+//è‡ªèº«ã‚’é™¤ãç´„æ•°ã®å’Œ
 int sun_divisors(int n){
 	if(n<=1)return 0;
 	int i,s=1;
@@ -22,14 +22,14 @@ int sun_divisors(int n){
 	return s;
 }
 
-//‘f””»’è O(ãn)
+//ç´ æ•°åˆ¤å®š O(âˆšn)
 bool isPrime(int n){
 	if(n<=1)return false;
 	for(int i=2;i*i<=n;i++)
 		if(n%i==0)return false;
 	return true;
 }
-//‘f”—ñ‹“ O(ãn)
+//ç´ æ•°åˆ—æŒ™ O(âˆšn)
 vector<int> divisor(int n){
 	vector<int> res;
 	for(int i=1;i*i<=n;i++){
@@ -39,7 +39,7 @@ vector<int> divisor(int n){
 		}
 	}
 }
-//‘fˆö”•ª‰ğ O(ãn)
+//ç´ å› æ•°åˆ†è§£ O(âˆšn)
 map<int,int> prime_factor(int n){
 	map<int,int> res;
 	for(int i=2;i*i<=n;i++){
@@ -51,9 +51,9 @@ map<int,int> prime_factor(int n){
 	if(1<n)res[n]=1;
 	return res;
 }
-//ƒGƒ‰ƒgƒXƒeƒlƒX‚Ìâ¿ O(n loglog n)
+//ã‚¨ãƒ©ãƒˆã‚¹ãƒ†ãƒã‚¹ã®ç¯© O(n loglog n)
 #define MAX_N 1000000
-int prime[MAX_N];//i”Ô–Ú‚Ì‘f”
+int prime[MAX_N];//iç•ªç›®ã®ç´ æ•°
 bool is_prime[MAX_N+1];
 int sieve(int n){
 	int p=0;
@@ -68,11 +68,11 @@ int sieve(int n){
 	return p;
 }
 
-//osa_k–@ ‚‘¬‘fˆö”•ª‰ğ ‘Oˆ—O(n loglog n)@–{ŒvZO(log n)
+//osa_kæ³• é«˜é€Ÿç´ å› æ•°åˆ†è§£ å‰å‡¦ç†O(n loglog n)ã€€æœ¬è¨ˆç®—O(log n)
 #define MAX_N 1000000
-int prime[MAX_N];//i”Ô–Ú‚Ì‘f”
+int prime[MAX_N];//iç•ªç›®ã®ç´ æ•°
 bool is_prime[MAX_N+1];
-int min_factor[MAX+1];//Å¬‚Ì‘fˆö”
+int min_factor[MAX+1];//æœ€å°ã®ç´ å› æ•°
 int sieve(int n){
 	int p=0;
 	memset(is_prime,true,sizeof(is_prime));
@@ -109,7 +109,7 @@ vector<pair<int,int> > prime_factor(int n){
 }
 
 
-//•ª”‚ğ\i•\‹L‚É
+//åˆ†æ•°ã‚’åé€²è¡¨è¨˜ã«
 string todemical(int x,int y){
 	string s="0.";
 	while(x){
@@ -122,7 +122,7 @@ string todemical(int x,int y){
 
 
 #define MOD 1000000007
-//ƒpƒXƒJƒ‹‚ÌOŠpŒ` nCr‚ğ—ñ‹“O(n^2)
+//ãƒ‘ã‚¹ã‚«ãƒ«ã®ä¸‰è§’å½¢ nCrã‚’åˆ—æŒ™O(n^2)
 int c[MAXN+1][MAXN+1];
 void init(){
 	c[0][0]=1;
@@ -132,11 +132,11 @@ void init(){
 			c[i][j] = (c[i-1][j-1]+c[i-1][j])%MOD;
 	}
 }
-//‹tŒ³‚Å“ñ€ŒW”‚ğŒvZ(MOD‚Í‘f”)@‘Oˆ—O(n),–{ŒvZO(1)
+//é€†å…ƒã§äºŒé …ä¿‚æ•°ã‚’è¨ˆç®—(MODã¯ç´ æ•°)ã€€å‰å‡¦ç†O(n),æœ¬è¨ˆç®—O(1)
 #define MAXN 1000000
-long long inv[MAXN+1];//MOD‚ğ–@‚Æ‚·‚éæ–@‚Ì‹tŒ³
-long long fact[MAXN+1];//ŠKæ
-long long ifact[MAXN+1];//ŠKæ‚Ì‹tŒ³
+long long inv[MAXN+1];//MODã‚’æ³•ã¨ã™ã‚‹ä¹—æ³•ã®é€†å…ƒ
+long long fact[MAXN+1];//éšä¹—
+long long ifact[MAXN+1];//éšä¹—ã®é€†å…ƒ
 void init(){
 	inv[1] = 1;
 	for(int i=2;i<=MAXN;i++) inv[i] = inv[MOD%i] * (MOD - MOD/i) % MOD;
@@ -161,7 +161,7 @@ long long pow_mod(long long x,long long y){
 	}
 	return res;
 }
-//Šg’£ƒ†[ƒNƒŠƒbƒh‚ÌŒİœ–@
+//æ‹¡å¼µãƒ¦ãƒ¼ã‚¯ãƒªãƒƒãƒ‰ã®äº’é™¤æ³•
 long long extgcd(int a,int b,int &x,int &y){
 	int gcd_=a;
 	if(b){
@@ -172,9 +172,9 @@ long long extgcd(int a,int b,int &x,int &y){
 	}
 	return gcd_;
 }
-//‹tŒ³‚ğŒvZ O(log MOD)
+//é€†å…ƒã‚’è¨ˆç®— O(log MOD)
 int inv_mod(int a){
-	//return mod_pow(a,MOD-2);//MOD‚ª‘f”‚Ì‚Æ‚«‚¾‚¯
+	//return mod_pow(a,MOD-2);//MODãŒç´ æ•°ã®ã¨ãã ã‘
 	int x,y;
 	extgcd(a,MOD,x,y);
 	return (MOD+x%MOD)%MOD;

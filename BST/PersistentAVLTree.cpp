@@ -13,8 +13,8 @@ using namespace std;
 
 class Nothing{};
 
-//‰i‘±AVL–Ø
-//ƒKƒx[ƒWƒRƒŒƒNƒVƒ‡ƒ“H‚È‚É‚»‚ê‚¨‚¢‚µ‚¢‚Ì
+//æ°¸ç¶šAVLæœ¨
+//ã‚¬ãƒ™ãƒ¼ã‚¸ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ï¼Ÿãªã«ãã‚ŒãŠã„ã—ã„ã®
 template<class Key,class Val=Nothing>
 class PersistentAVLTree{
 	struct Node{
@@ -182,7 +182,7 @@ public:
 	Key nth_element(int n)const{
 		return root->nth_element(n)->key;
 	}
-	int rank_lt(const Key& k)const{//k–¢–‚ÌŒÂ”
+	int rank_lt(const Key& k)const{//kæœªæº€ã®å€‹æ•°
 		return root->rank_lt(k);
 	}
 	int rank_gt(const Key& k)const{

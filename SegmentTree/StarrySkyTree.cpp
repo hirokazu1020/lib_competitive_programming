@@ -38,10 +38,10 @@ public:
 		segv.assign(2*n-1,0);
 		segAdd.assign(2*n-1,0);
 	}
-	void add(int a,int b,int x){//[a,b)‚Éx‚ğ‰ÁZ
+	void add(int a,int b,int x){//[a,b)ã«xã‚’åŠ ç®—
 		add(a,b,x,0,0,n);
 	}
-	long long min(int a,int b)const{//[a,b)‚ÌÅ¬’l
+	long long min(int a,int b)const{//[a,b)ã®æœ€å°å€¤
 		return min(a,b,0,0,n);
 	}
 };

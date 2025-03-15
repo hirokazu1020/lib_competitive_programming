@@ -31,7 +31,7 @@ public:
 
 
 
-//��ċA
+//非再帰
 class Trie{
 	struct Node{
 		int child[26];

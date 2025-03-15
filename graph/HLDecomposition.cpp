@@ -58,7 +58,7 @@ public:
 		}
 		return par[u];
 	}
-	int depth(int u)const{//root‚Ì[‚³‚ª1
+	int depth(int u)const{//rootã®æ·±ã•ãŒ1
 		return _depth[u];
 	}
 };
@@ -66,21 +66,21 @@ public:
 
 
 
-class BIT{//binary indexed tree, Fenwick tree‚Æ‚à
+class BIT{//binary indexed tree, Fenwick treeã¨ã‚‚
 	std::vector<int> bit;
 public:
 	BIT(const vector<int> &v):bit(v.size()+1,0){
 		for(int i=0;i<(int)v.size();i++)
 			add(i,v[i]);
 	}
-	void add(int i,int x){//i”Ô–Ú‚Éx‰Á‚¦‚é
-		i++;//BIT“Y‚¦š‚Í1`‚‚¾‚©‚ç
+	void add(int i,int x){//iç•ªç›®ã«xåŠ ãˆã‚‹
+		i++;//BITæ·»ãˆå­—ã¯1ã€œï½ã ã‹ã‚‰
 		while(i<(int)bit.size()){
 			bit[i]+=x;
 			i+= i&-i;
 		}
 	}
-	int sum(int a)const{//[0,a]‚Ì˜a
+	int sum(int a)const{//[0,a]ã®å’Œ
 		a++;
 		int res=0;
 		while(0<a){
@@ -89,7 +89,7 @@ public:
 		}
 		return res;
 	}
-	int sum(int a,int b)const{//[a,b]‚Ì‡Œv
+	int sum(int a,int b)const{//[a,b]ã®åˆè¨ˆ
 		return sum(b)-sum(a-1);
 	}
 	void zeroclear(){
@@ -167,7 +167,7 @@ public:
 		max_subtree(0,edge,maxsz);
 		build(0,edge,val,maxsz);
 	}
-	long long query(int u,int v)const{//u->v‚Ì’¸“_‚Ì˜a
+	long long query(int u,int v)const{//u->vã®é ‚ç‚¹ã®å’Œ
 		int w=lca.query(u,v);
 		pair<int,int> a,b,c;
 		a=ver[u];

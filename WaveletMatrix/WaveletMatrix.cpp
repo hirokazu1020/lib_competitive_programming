@@ -45,7 +45,7 @@ inline int kthLowestPop(unsigned int pop1,int k){
 }
 
 
-//ƒƒ‚ƒŠg—p—Ê:2nƒrƒbƒg
+//ãƒ¡ãƒ¢ãƒªä½¿ç”¨é‡:2nãƒ“ãƒƒãƒˆ
 class BitVector{
 	int n;
 	int blocks;
@@ -74,11 +74,11 @@ public:
 	bool access(int k)const{
 		return B[k>>5] & 1<<(k&31);
 	}
-	//[0,k)‚Ì1‚ÌŒÂ”
+	//[0,k)ã®1ã®å€‹æ•°
 	int rank(int k)const{
 		return r[k>>5] + popCount(B[k>>5] & ((1<<(k&31))-1));
 	}
-	//k+1”Ô–Ú‚Ì‚P‚ÌêŠ
+	//k+1ç•ªç›®ã®ï¼‘ã®å ´æ‰€
 	//O(log n)
 	int select1(int k)const{
 		int lb=0,ub=blocks;
@@ -106,7 +106,7 @@ public:
 };
 
 
-//ƒEƒF[ƒuƒŒƒbƒgs—ñ
+//ã‚¦ã‚§ãƒ¼ãƒ–ãƒ¬ãƒƒãƒˆè¡Œåˆ—
 class WaveletMatrix{
 	typedef int Val;
 	static const Val NIL=-1;
@@ -135,7 +135,7 @@ public:
 	WaveletMatrix(const T &v){
 		init(v);
 	}
-	//O(n logƒĞ)
+	//O(n logÏƒ)
 	template<class T>
 	void init(const T &v){
 		len = v.size();
@@ -170,7 +170,7 @@ public:
 		}
 		delete[] bucket;
 	}
-	//O(logƒĞ)
+	//O(logÏƒ)
 	Val access(int k)const{
 		int code=0;
 		for(int i=BITLEN-1;i>0;i--){
@@ -184,8 +184,8 @@ public:
 		if(bv[0].access(k))code |= 1;
 		return decode(code);
 	}
-	//[s,e)’†‚Ìc‚ÌŒÂ”
-	//O(logƒĞ)
+	//[s,e)ä¸­ã®cã®å€‹æ•°
+	//O(logÏƒ)
 	int rank(int s,int e,Val c)const{
 		int n = encode(c);
 		for(int i=BITLEN-1;i>=0;i--){
@@ -201,8 +201,8 @@ public:
 		}
 		return e-s;
 	}
-	//k+1”Ô–Ú‚Ìc‚ÌˆÊ’u
-	//O(log n logƒĞ)
+	//k+1ç•ªç›®ã®cã®ä½ç½®
+	//O(log n logÏƒ)
 	int select(Val c,int k)const{
 		int n = encode(c);
 		int s=0,e=len;
@@ -225,8 +225,8 @@ public:
 		}
 		return p;
 	}
-	//[s,e)’†‚ÅoŒ»•p“x‚ª‘½‚¢‡‚ÉkŒÂ•Ô‚·
-	//O(min(e-s,ƒĞ)logƒĞ) ,•p“x‚ª•Î‚Á‚Ä‚¢‚ê‚ÎO(klogƒĞ)
+	//[s,e)ä¸­ã§å‡ºç¾é »åº¦ãŒå¤šã„é †ã«kå€‹è¿”ã™
+	//O(min(e-s,Ïƒ)logÏƒ) ,é »åº¦ãŒåã£ã¦ã„ã‚Œã°O(klogÏƒ)
 	vector<pair<Val,int> > topk(int s,int e,int k)const{
 		vector<pair<Val,int> > res;
 		priority_queue<Node> pq;
@@ -250,8 +250,8 @@ public:
 		}
 		return res;
 	}
-	//[s,e)’†‚Ìr+1”Ô–Ú‚É‘å‚«‚¢•¶š
-	//O(logƒĞ)
+	//[s,e)ä¸­ã®r+1ç•ªç›®ã«å¤§ãã„æ–‡å­—
+	//O(logÏƒ)
 	Val quantile(int s,int e,int r)const{
 		int code=0;
 		for(int i=BITLEN-1;i>=0;i--){
@@ -271,7 +271,7 @@ public:
 		}
 		return decode(code);
 	}
-	//[s,e)’†‚Ìx–¢–‚Ì•¶š‚ÌŒÂ”
+	//[s,e)ä¸­ã®xæœªæº€ã®æ–‡å­—ã®å€‹æ•°
 	int rank_lt(int s,int e,Val x)const{
 		int n = encode(x);
 		int res=0;
@@ -290,13 +290,13 @@ public:
 		}
 		return res;
 	}
-	//[s,e)’†‚Ì x<=c<y ‚Æ‚È‚é•¶š‚ÌŒÂ”
-	//O(logƒĞ)
+	//[s,e)ä¸­ã® x<=c<y ã¨ãªã‚‹æ–‡å­—ã®å€‹æ•°
+	//O(logÏƒ)
 	int rangefreq(int s,int e,Val x,Val y)const{
 		return rank_lt(s,e,y)-rank_lt(s,e,x);
 	}
-	//[s,e)’†‚ÉoŒ»‚·‚é•¶š‚ğ‘å‚«‚¢‡‚É•p“x‚Æ‹¤‚ÉkŒÂ•Ô‚·
-	//O(k logƒĞ)
+	//[s,e)ä¸­ã«å‡ºç¾ã™ã‚‹æ–‡å­—ã‚’å¤§ãã„é †ã«é »åº¦ã¨å…±ã«kå€‹è¿”ã™
+	//O(k logÏƒ)
 	vector<pair<Val,int> > rangemaxk(int s,int e,int k)const{
 		Node sta[BITLEN+1];
 		int sp=0;
@@ -320,8 +320,8 @@ public:
 		}
 		return res;
 	}
-	//[s,e)’†‚ÉoŒ»‚·‚é•¶š‚ğ¬‚³‚¢‡‚É•p“x‚Æ‹¤‚ÉkŒÂ•Ô‚·
-	//O(k logƒĞ)
+	//[s,e)ä¸­ã«å‡ºç¾ã™ã‚‹æ–‡å­—ã‚’å°ã•ã„é †ã«é »åº¦ã¨å…±ã«kå€‹è¿”ã™
+	//O(k logÏƒ)
 	vector<pair<Val,int> > rangemink(int s,int e,int k)const{
 		Node sta[BITLEN+1];
 		int sp=0;
@@ -345,8 +345,8 @@ public:
 		}
 		return res;
 	}
-	//[s,e)’†‚Ìx<=c<y‚Æ‚È‚é•¶šc‚ğ•p“x‚Æ‹¤‚É—ñ‹“‚·‚é
-	//•Ô‚·•¶ší—Ş‚ğk‚Æ‚·‚é‚Æ O(k logƒĞ)
+	//[s,e)ä¸­ã®x<=c<yã¨ãªã‚‹æ–‡å­—cã‚’é »åº¦ã¨å…±ã«åˆ—æŒ™ã™ã‚‹
+	//è¿”ã™æ–‡å­—ç¨®é¡ã‚’kã¨ã™ã‚‹ã¨ O(k logÏƒ)
 	vector<pair<Val,int> > rangelist(int s,int e,Val x,Val y)const{
 		int ub = encode(y);
 		int lb = encode(x);
@@ -371,8 +371,8 @@ public:
 		}
 		return res;
 	}
-	//[s,e)’†‚Ìx<=c<y‚Æ‚È‚éÅ¬‚Ìc‚ğ•Ô‚·
-	//O(logƒĞ)
+	//[s,e)ä¸­ã®x<=c<yã¨ãªã‚‹æœ€å°ã®cã‚’è¿”ã™
+	//O(logÏƒ)
 	Val nextvalue(int s,int e,Val x,Val y)const{
 		int lb = encode(x);
 		int ub = encode(y)-1;
@@ -415,8 +415,8 @@ public:
 		}
 		return decode(a.code);
 	}
-	//[s,e)’†‚Ìx<=c<y‚Æ‚È‚éÅ‘å‚Ìc‚ğ•Ô‚·
-	//O(logƒĞ)
+	//[s,e)ä¸­ã®x<=c<yã¨ãªã‚‹æœ€å¤§ã®cã‚’è¿”ã™
+	//O(logÏƒ)
 	Val prevvalue(int s,int e,Val x,Val y)const{
 		int lb = encode(x);
 		int ub = encode(y)-1;
@@ -458,11 +458,11 @@ public:
 		}
 		return decode(a.code);
 	}
-	//[s,e)‚Æ[u,v)‚Å‹¤’Ê‚µ‚ÄoŒ»‚·‚é’l‚ğ•Ô‚·
-	//‚¢‚Â‚©À‘•‚·‚é‚©‚à
+	//[s,e)ã¨[u,v)ã§å…±é€šã—ã¦å‡ºç¾ã™ã‚‹å€¤ã‚’è¿”ã™
+	//ã„ã¤ã‹å®Ÿè£…ã™ã‚‹ã‹ã‚‚
 	//vector<pair<int,pair<int,int> > > intersect(int s,int e,int u,int v){}
 
-	//[s,e)‰ß”¼”‚Ì’l
+	//[s,e)éåŠæ•°ã®å€¤
 	Val moreThanHalf(int s,int e)const{
 		int code=0;
 		int h=(e-s)/2;
@@ -501,13 +501,13 @@ struct WMfor2DGird{
 		}
 		grid.init(seconds);
 	}
-	int count(int s,int e,int u,int v)const{//[s,e)*[u,v)“à‚Ì“_‚ÌŒÂ”
+	int count(int s,int e,int u,int v)const{//[s,e)*[u,v)å†…ã®ç‚¹ã®å€‹æ•°
 		int a,b;
 		a=lower_bound(firsts.begin(),firsts.end(),s)-firsts.begin();
 		b=lower_bound(firsts.begin(),firsts.end(),e)-firsts.begin();
 		return grid.rangefreq(a,b,u,v);
 	}
-	int count(int s,int e,int v)const{//[s,e)*[0,v)“à‚Ì“_‚ÌŒÂ”
+	int count(int s,int e,int v)const{//[s,e)*[0,v)å†…ã®ç‚¹ã®å€‹æ•°
 		int a,b;
 		a=lower_bound(firsts.begin(),firsts.end(),s)-firsts.begin();
 		b=lower_bound(firsts.begin(),firsts.end(),e)-firsts.begin();

@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
 
-//—vverify
-//‘}“üíœ‚ğƒTƒ|[ƒg‚·‚é“®“I‚È—ñ
+//è¦verify
+//æŒ¿å…¥å‰Šé™¤ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å‹•çš„ãªåˆ—
 template<class Val>
 class DynamicArray{
 	struct Node{

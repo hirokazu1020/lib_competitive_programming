@@ -1,4 +1,4 @@
-要verify
+隕」erify
 //ver A
 long long pow_mod(long long x,long long y){
 	int res=1;
@@ -28,7 +28,7 @@ public:
 };
 
 //ver B
-//ロバスト版2重ハッシュ Mと2^64のmod
+//繝ｭ繝舌せ繝育沿2驥阪ワ繝�繧ｷ繝･ M縺ｨ2^64縺ｮmod
 #include<utility>
 template <int B=17,long long  M=10000000000000061>
 class RollingHash{

@@ -3,7 +3,7 @@
 #include<cstring>
 
 
-class BIT{//binary indexed tree, Fenwick tree‚Æ‚à
+class BIT{//binary indexed tree, Fenwick treeã¨ã‚‚
 	int lg;
 	std::vector<int> bit;
 public:
@@ -11,14 +11,14 @@ public:
 		lg=size;
 		while(lg&lg-1)lg&=lg-1;
 	}
-	void add(int i,int x){//i”Ô–Ú‚Éx‰Á‚¦‚é
-		i++;//BIT“Y‚¦š‚Í1`‚‚¾‚©‚ç
+	void add(int i,int x){//iç•ªç›®ã«xåŠ ãˆã‚‹
+		i++;//BITæ·»ãˆå­—ã¯1ã€œï½ã ã‹ã‚‰
 		while(i<(int)bit.size()){
 			bit[i]+=x;
 			i+= i&-i;
 		}
 	}
-	int sum(int a)const{//[0,a]‚Ì˜a
+	int sum(int a)const{//[0,a]ã®å’Œ
 		a++;
 		int res=0;
 		while(0<a){
@@ -27,15 +27,15 @@ public:
 		}
 		return res;
 	}
-	int sum(int a,int b)const{//[a,b]‚Ì‡Œv
+	int sum(int a,int b)const{//[a,b]ã®åˆè¨ˆ
 		return sum(b)-sum(a-1);
 	}
 	void zeroclear(){
 		bit.assign(bit.size(),0);
 	}
 	//verified UTPC2013I
-	//W‡‚Ìprevvalue,nextvalue‚Æ‚µ‚Ä‚àg‚¦‚é lower_bound(sum(s))
-	int lower_bound(int w)const{//sum([0,a])‚ÅwˆÈã‚Æ‚È‚éÅ¬‚Ìindex (•‰”‚ªŠÜ‚Ü‚ê‚Ä‚Í‚¾‚ß)
+	//é›†åˆã®prevvalue,nextvalueã¨ã—ã¦ã‚‚ä½¿ãˆã‚‹ lower_bound(sum(s))
+	int lower_bound(int w)const{//sum([0,a])ã§wä»¥ä¸Šã¨ãªã‚‹æœ€å°ã®index (è² æ•°ãŒå«ã¾ã‚Œã¦ã¯ã ã‚)
 		if(w<=0)return 0;
 		int x=0;
 		for(int k=lg;k;k>>=1){
@@ -46,9 +46,9 @@ public:
 		}
 		return x+1==bit.size()?-1:x;
 	}
-	//—vverify
-	//BIT‚ğset‚Æ‚µ‚Äg‚¤ 
-	int nextvalue(int x)const{//x‚æ‚è‘å‚ÌÅ¬‚Ì’l ŠÈˆÕ”Å
+	//è¦verify
+	//BITã‚’setã¨ã—ã¦ä½¿ã† 
+	int nextvalue(int x)const{//xã‚ˆã‚Šå¤§ã®æœ€å°ã®å€¤ ç°¡æ˜“ç‰ˆ
 		return lower_bound(sum(x)+1);
 	}
 	int prevvalue(int x)const{
@@ -91,7 +91,7 @@ public:
 	}
 };
 
-/*--- “®ìŠm”F—p ---*/
+/*--- å‹•ä½œç¢ºèªç”¨ ---*/
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>

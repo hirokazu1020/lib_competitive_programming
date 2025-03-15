@@ -4,7 +4,7 @@
 using namespace std;
 
 
-//前処理O(n log n) 区間最小値クエリO(1)
+//蜑榊�ｦ逅�O(n log n) 蛹ｺ髢捺怙蟆丞､繧ｯ繧ｨ繝ｪO(1)
 class SparseTableRMQ{
 	int maxlog;
 	std::vector<char> log;
@@ -27,7 +27,7 @@ public:
 			}
 		}
 	}
-	int query(int i,int j)const{//[i,j)の最小値
+	int query(int i,int j)const{//[i,j)縺ｮ譛蟆丞､
 		int k=log[j-i];
 		return std::min(M[i*maxlog+k], M[(j-(1<<k))*maxlog+k]);
 	}

@@ -24,18 +24,18 @@ public:
 	}
 };
 
-//—vverify
+//è¦verify
 class BITRangeAdd{
 	BIT bit0,bit1;
 public:
 	BITRangeAdd(int size):bit0(size+1),bit1(size+1){}
-	void add(int a,int b,long long x){//[a,b)‚Éx‰ÁZ
+	void add(int a,int b,long long x){//[a,b)ã«xåŠ ç®—
 		bit0.add(a,-x*a);
 		bit0.add(b,x*b);
 		bit1.add(a,x);
 		bit1.add(b,-x);
 	}
-	long long sum(int a)const{//[0,a]‚Ì˜a
+	long long sum(int a)const{//[0,a]ã®å’Œ
 		return bit0.sum(a)+(a+1)*bit1.sum(a);
 	}
 };

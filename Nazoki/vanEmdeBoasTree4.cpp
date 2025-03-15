@@ -5,9 +5,9 @@
 
 using namespace std;
 
-//‹óŠÔO(“ä)
-//U‚ª‘å‚«‚¢‚Æ’x‚­‚È‚é U=20’ö“x‚È‚çset‚æ‚è‘¬‚¢
-//d•¡‘}“üd•¡íœ‚Ì‹““®‚Í–¢’m
+//ç©ºé–“O(è¬)
+//UãŒå¤§ãã„ã¨é…ããªã‚‹ U=20ç¨‹åº¦ãªã‚‰setã‚ˆã‚Šé€Ÿã„
+//é‡è¤‡æŒ¿å…¥é‡è¤‡å‰Šé™¤ã®æŒ™å‹•ã¯æœªçŸ¥
 template<int U=30> 
 class vanEmdeBoasTree{
 	friend class vanEmdeBoasTree<U*2>;

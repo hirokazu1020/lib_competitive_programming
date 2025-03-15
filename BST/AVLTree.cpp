@@ -168,7 +168,7 @@ public:
 	Key nth_element(int n)const{
 		return root->nth_element(n)->key;
 	}
-	int rank_lt(const Key& k)const{//k–¢–‚ÌŒÂ”
+	int rank_lt(const Key& k)const{//kæœªæº€ã®å€‹æ•°
 		return root->rank_lt(k);
 	}
 	int rank_gt(const Key& k)const{

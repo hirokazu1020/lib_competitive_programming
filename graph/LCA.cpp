@@ -4,8 +4,8 @@
 #include<climits>
 
 
-//doublingÀ‘•  <‹óŠÔO(n log n),‘Oˆ—O(n log g),ƒNƒGƒŠO(log n)>
-//  ’Z‚¢À‘•‚Å 
+//doublingå®Ÿè£…  <ç©ºé–“O(n log n),å‰å‡¦ç†O(n log g),ã‚¯ã‚¨ãƒªO(log n)>
+//  çŸ­ã„å®Ÿè£…ã§ 
 class LCA{
 	int lg,n;
 	std::vector<int> _depth,par;
@@ -41,7 +41,7 @@ public:
 		}
 		return par[u];
 	}
-	int depth(int u)const{//root‚Ì[‚³‚ª1
+	int depth(int u)const{//rootã®æ·±ã•ãŒ1
 		return _depth[u];
 	}
 };
@@ -50,8 +50,8 @@ public:
 
 /*
 //Lowest Common Ancestor
-//segtreeRMQÀ‘•  <‹óŠÔO(n),‘Oˆ—O(n),ƒNƒGƒŠO(log n)>
-//***********ƒXƒ^ƒbƒNƒI[ƒo[ƒtƒ[’ˆÓ*************
+//segtreeRMQå®Ÿè£…  <ç©ºé–“O(n),å‰å‡¦ç†O(n),ã‚¯ã‚¨ãƒªO(log n)>
+//***********ã‚¹ã‚¿ãƒƒã‚¯ã‚ªãƒ¼ãƒãƒ¼ãƒ•ãƒ­ãƒ¼æ³¨æ„*************
 class LCA{
 	int n;
 	std::vector<int> _depth,idx;
@@ -99,12 +99,12 @@ public:
 		_depth.push_back(0);
 		buildRMQ();
 	}
-	int query(int u,int v)const{//u‚Æv‚ÌÅ¬‹¤’Ê‘cæ
+	int query(int u,int v)const{//uã¨vã®æœ€å°å…±é€šç¥–å…ˆ
 		if(u==v)return u;
 		if(in[u]>in[v])std::swap(u,v);
 		return eulertour[minimum(in[u], in[v],0,0,n)];
 	}
-	int depth(int u)const{//root‚Ì[‚³‚ª1
+	int depth(int u)const{//rootã®æ·±ã•ãŒ1
 		return _depth[in[u]];
 	}
 };
@@ -114,8 +114,8 @@ public:
 
 
 
-//doubling ƒCƒ“ƒ^[ƒtƒF[ƒX’Ç‰Á
-//[‚³ŒvZ‚ÅÄ‹A
+//doubling ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹è¿½åŠ 
+//æ·±ã•è¨ˆç®—ã§å†å¸°
 class LCA{
 	int lg,n;
 	std::vector<int> _depth,par;
@@ -163,13 +163,13 @@ public:
 		}
 		return par[u];
 	}
-	int depth(int u)const{//root‚Ì[‚³‚ª1
+	int depth(int u)const{//rootã®æ·±ã•ãŒ1
 		return _depth[u];
 	}
 };
 
-//doubling ƒCƒ“ƒ^[ƒtƒF[ƒXedge‚Ì‚İ
-//”ñÄ‹AÀ‘•
+//doubling ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹edgeã®ã¿
+//éå†å¸°å®Ÿè£…
 class LCA{
 	int lg,n;
 	vector<int> _depth,par;
@@ -219,7 +219,7 @@ public:
 		}
 		return par[u];
 	}
-	int depth(int u)const{//root‚Ì[‚³‚ª1
+	int depth(int u)const{//rootã®æ·±ã•ãŒ1
 		return _depth[u];
 	}
 };

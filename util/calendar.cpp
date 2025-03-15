@@ -22,7 +22,7 @@ int calc(int y,int m,int d){
 	res+=y*365;
 	return res;
 }
-int calc(int y,int m,int d){//1”N1Œ1“ú‚©‚ç‚ÌŒo‰ß“ú”
+int calc(int y,int m,int d){//1å¹´1æœˆ1æ—¥ã‹ã‚‰ã®çµŒéæ—¥æ•°
 	int res=0;
 	for(int i=1;i<y;i++){
 		if(i%4==0&&(i%100||i%400==0))res+=366;

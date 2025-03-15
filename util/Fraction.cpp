@@ -3,7 +3,7 @@ long gcd(long a,long b){
 	return gcd(b,a%b);
 }
 
-//•ª”ƒNƒ‰ƒX
+//åˆ†æ•°ã‚¯ãƒ©ã‚¹
 struct Fraction{
 	long long x,y;
 	Fraction(){}

@@ -1,11 +1,11 @@
-//�vverify
+//要verify
 
 #include<queue>
 #include<functional>
 #include<vector>
 
 //Double-Ended priority queue
-//�Ȃ炵O(log n)
+//ならしO(log n)
 template<class T>
 class DEPQ{
 	mutable std::priority_queue<T,std::vector<T>,greater<T> > minheap,mindel;	
