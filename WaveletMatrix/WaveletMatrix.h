@@ -1,3 +1,5 @@
+#include "BitVector.h"
+
 #include<iostream>
 #include<vector>
 #include<string>
@@ -7,103 +9,7 @@
 #include<utility>
 #include<cstdlib>
 #include<ctime>
-using namespace std;
 
-inline int popCount(unsigned int x) {
-	x = x - (( x >> 1 ) & 0x55555555);
-	x = (x & 0x33333333) + (( x >> 2) & 0x33333333);
-	x = ( x + ( x >> 4 )) & 0x0F0F0F0F;
-	x = x + ( x >> 8 );
-	x = x + ( x >> 16 );
-	return x & 0x0000003F;
-}
-inline int kthLowestPop(unsigned int pop1,int k){
-	unsigned int pop2,pop4,pop8,pop16;
-	int pos=0;
-	pop2 = (pop1>>1 & 0x55555555)+(pop1 & 0x55555555);
-	pop4 = (pop2>>2 & 0x33333333)+(pop2 & 0x33333333);
-	pop8 = (pop4>>4 & 0x0f0f0f0f)+(pop4 & 0x0f0f0f0f);
-	pop16= (pop8>>8 & 0x00ff00ff)+(pop8 & 0x00ff00ff);
-	if((pop16    &0x0000ffff) <= k){
-		k -= (pop16    &0x0000ffff);
-		pos |= 16;
-	}
-	if((pop8>>pos&0x000000ff) <= k){
-		k -= (pop8>>pos&0x000000ff);
-		pos |= 8;
-	}
-	if((pop4>>pos&0x0000000f) <= k){
-		k -= (pop4>>pos&0x0000000f);
-		pos |= 4;
-	}
-	if((pop2>>pos&0x00000003) <= k){
-		k -= (pop2>>pos&0x00000003);
-		pos |= 2;
-	}
-	if((pop1>>pos&0x00000001) <= k)pos |= 1;
-	return pos;
-}
-
-
-//メモリ使用量:2nビット
-class BitVector{
-	int n;
-	int blocks;
-	vector<unsigned int> B;
-	vector<int> r;
-public:
-	BitVector(){}
-	BitVector(int size){
-		init(size);
-	}
-	void init(int size){
-		n = size;
-		blocks = (n>>5)+1;
-		B.assign(blocks ,0);
-		r.assign(blocks ,0);
-	}
-	void set(int k){
-		B[k>>5] |= 1<<(k&31);
-	}
-	void build(){
-		r[0]=0;
-		for(int i=1;i<blocks;i++){
-			r[i] = popCount(B[i-1]) + r[i-1];
-		}
-	}	
-	bool access(int k)const{
-		return B[k>>5] & 1<<(k&31);
-	}
-	//[0,k)の1の個数
-	int rank(int k)const{
-		return r[k>>5] + popCount(B[k>>5] & ((1<<(k&31))-1));
-	}
-	//k+1番目の１の場所
-	//O(log n)
-	int select1(int k)const{
-		int lb=0,ub=blocks;
-		if(k==-1)return -1;
-		while(ub-lb>1){
-			int m = (lb+ub)/2;
-			if(k<r[m])ub=m;
-			else lb=m;
-		}
-		k -= r[lb];
-		return lb<<5 | kthLowestPop(B[lb],k);
-	}
-	//O(log n)
-	int select0(int k)const{
-		int lb=0,ub=blocks;
-		if(k==-1)return -1;
-		while(ub-lb>1){
-			int m = (lb+ub)/2;
-			if(k<(m<<5)-r[m])ub=m;
-			else lb=m;
-		}
-		k -= (lb<<5)-r[lb];
-		return lb<<5 | kthLowestPop(~B[lb],k);
-	}
-};
 
 
 //ウェーブレット行列
@@ -227,15 +133,15 @@ public:
 	}
 	//[s,e)中で出現頻度が多い順にk個返す
 	//O(min(e-s,σ)logσ) ,頻度が偏っていればO(klogσ)
-	vector<pair<Val,int> > topk(int s,int e,int k)const{
-		vector<pair<Val,int> > res;
-		priority_queue<Node> pq;
+	std::vector<std::pair<Val,int> > topk(int s,int e,int k)const{
+		std::vector<std::pair<Val,int> > res;
+		std::priority_queue<Node> pq;
 		pq.push(Node(BITLEN-1,s,e,0));
 		while(!pq.empty() && 0<=k){
 			Node a = pq.top();
 			pq.pop();
 			if(a.height==-1){
-				res.push_back(make_pair(decode(a.code),a.e-a.s));
+				res.push_back(std::make_pair(decode(a.code),a.e-a.s));
 				k--;
 				continue;
 			}
@@ -297,15 +203,15 @@ public:
 	}
 	//[s,e)中に出現する文字を大きい順に頻度と共にk個返す
 	//O(k logσ)
-	vector<pair<Val,int> > rangemaxk(int s,int e,int k)const{
+	std::vector<std::pair<Val,int> > rangemaxk(int s,int e,int k)const{
 		Node sta[BITLEN+1];
 		int sp=0;
-		vector<pair<Val,int> > res;
+		std::vector<std::pair<Val,int> > res;
 		sta[sp++] = Node(BITLEN-1,s,e,0);
 		while(sp && 0<=k){
 			Node a = sta[--sp];
 			if(a.height==-1){
-				res.push_back(make_pair(decode(a.code),a.e-a.s));
+				res.push_back(std::make_pair(decode(a.code),a.e-a.s));
 				k--;
 				continue;
 			}
@@ -322,15 +228,15 @@ public:
 	}
 	//[s,e)中に出現する文字を小さい順に頻度と共にk個返す
 	//O(k logσ)
-	vector<pair<Val,int> > rangemink(int s,int e,int k)const{
+	std::vector<std::pair<Val,int> > rangemink(int s,int e,int k)const{
 		Node sta[BITLEN+1];
 		int sp=0;
-		vector<pair<Val,int> > res;
+		std::vector<std::pair<Val,int> > res;
 		sta[sp++] = Node(BITLEN-1,s,e,0);
 		while(sp && 0<=k){
 			Node a = sta[--sp];
 			if(a.height==-1){
-				res.push_back(make_pair(decode(a.code),a.e-a.s));
+				res.push_back(std::make_pair(decode(a.code),a.e-a.s));
 				k--;
 				continue;
 			}
@@ -347,17 +253,17 @@ public:
 	}
 	//[s,e)中のx<=c<yとなる文字cを頻度と共に列挙する
 	//返す文字種類をkとすると O(k logσ)
-	vector<pair<Val,int> > rangelist(int s,int e,Val x,Val y)const{
+	std::vector<std::pair<Val,int> > rangelist(int s,int e,Val x,Val y)const{
 		int ub = encode(y);
 		int lb = encode(x);
 		Node sta[BITLEN+1];
 		int sp=0;
-		vector<pair<Val,int> > res;
+		std::vector<std::pair<Val,int> > res;
 		sta[sp++] = Node(BITLEN-1,0,len,0);
 		while(sp){
 			Node a = sta[--sp];
 			if(a.height==-1){
-				res.push_back(make_pair(decode(a.code),a.e-a.s));
+				res.push_back(std::make_pair(decode(a.code),a.e-a.s));
 				continue;
 			}
 			int ssum = bv[a.height].rank(a.s);
@@ -460,7 +366,7 @@ public:
 	}
 	//[s,e)と[u,v)で共通して出現する値を返す
 	//いつか実装するかも
-	//vector<pair<int,pair<int,int> > > intersect(int s,int e,int u,int v){}
+	//std::vector<std::pair<int,std::pair<int,int> > > intersect(int s,int e,int u,int v){}
 
 	//[s,e)過半数の値
 	Val moreThanHalf(int s,int e)const{
@@ -490,11 +396,11 @@ public:
 
 struct WMfor2DGird{
 	WaveletMatrix grid;
-	vector<int> firsts;
-	WMfor2DGird(vector<pair<int,int> > vp){
+	std::vector<int> firsts;
+	WMfor2DGird(std::vector<std::pair<int,int> > vp){
 		sort(vp.begin(),vp.end());
 		firsts.resize(vp.size());
-		vector<int> seconds(vp.size());
+		std::vector<int> seconds(vp.size());
 		for(int i=0;i<vp.size();i++){
 			firsts[i]=vp[i].first;
 			seconds[i]=vp[i].second;
@@ -514,7 +420,3 @@ struct WMfor2DGird{
 		return grid.rank_lt(a,b,v);
 	}
 };
-
-int main(){
-	return 0;
-}

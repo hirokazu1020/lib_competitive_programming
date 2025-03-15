@@ -1,3 +1,5 @@
+//verified AOJ2170
+
 struct SkewHeap{
 	SkewHeap *l,*r;
 	int val;
