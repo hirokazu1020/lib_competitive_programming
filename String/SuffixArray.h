@@ -1,42 +1,25 @@
-#include<sstream>
-#include<iostream>
-#include<cstdio>
-#include<cstdlib>
-#include<cstring>
-#include<cmath>
-#include<string>
+
 #include<vector>
-#include<set>
-#include<queue>
-#include<numeric>
-#include<functional>
-#include<algorithm>
-#include<climits>
-using namespace std;
-#define INF (1<<29)
-#define rep(i,n) for(int i=0;i<(int)(n);i++)
-
-
-
+#include<string>
 
 //verified
 class SuffixArray{
-	string text;
-	vector<int> sa;
+	std::string text;
+	std::vector<int> sa;
 
-	static bool eq(const vector<int> &v,int idx1,int idx2,const vector<bool> &type){
+	static bool eq(const std::vector<int> &v,int idx1,int idx2,const std::vector<bool> &type){
 		if(v[idx1]!=v[idx2])return false;
 		int last=v.size()-1;
 		for(int i=1;;i++){
 			if(v[idx1+i]!=v[idx2+i])return false;
-			if(idx1+i==last||type[idx1+i-1]&&!type[idx1+i])
-				return idx2+i==last||type[idx2+i-1]&&!type[idx2+i];
-			else if(idx2+i==last||type[idx2+i-1]&&!type[idx2+i])return false;
+			if(idx1+i==last||(type[idx1+i-1]&&!type[idx1+i]))
+				return idx2+i==last||(type[idx2+i-1]&&!type[idx2+i]);
+			else if(idx2+i==last||(type[idx2+i-1]&&!type[idx2+i]))return false;
 		}
 		return true;
 	}
 	template<bool erase>
-	static inline void Lsort(const vector<int> &v,const vector<bool> &type,vector<int> &bucket,vector<int> &rank_less){
+	static inline void Lsort(const std::vector<int> &v,const std::vector<bool> &type,std::vector<int> &bucket,std::vector<int> &rank_less){
 		for(int i=0;i<(int)bucket.size();i++){
 			if(bucket[i]>0 && type[bucket[i]-1]){
 				bucket[rank_less[v[bucket[i]-1]]++]=bucket[i]-1;
@@ -45,7 +28,7 @@ class SuffixArray{
 		}
 	}
 	template<bool erase>
-	static inline void Ssort(const vector<int> &v,const vector<bool> &type,vector<int> &bucket,vector<int> &rank_less_eq){
+	static inline void Ssort(const std::vector<int> &v,const std::vector<bool> &type,std::vector<int> &bucket,std::vector<int> &rank_less_eq){
 		for(int i=bucket.size()-1;i>=0;i--){
 			if(bucket[i]>0 && !type[bucket[i]-1]){
 				bucket[--rank_less_eq[v[bucket[i]-1]]]=bucket[i]-1;
@@ -54,11 +37,11 @@ class SuffixArray{
 		}
 	}
 	
-	static vector<int> induced_sorting(const vector<int> &v,int alpha){
-		vector<int> bucket(v.size());
-		vector<int> rank(alpha),c(alpha);
-		vector<bool> type(v.size());//false=>S,true=>L
-		vector<int> lmsidx,lmsord;
+	static std::vector<int> induced_sorting(const std::vector<int> &v,int alpha){
+		std::vector<int> bucket(v.size());
+		std::vector<int> rank(alpha),c(alpha);
+		std::vector<bool> type(v.size());//false=>S,true=>L
+		std::vector<int> lmsidx,lmsord;
 		type.back()=true;
 		for(int i=v.size()-2;i>=0;i--){
 			if(v[i]<v[i+1])type[i]=false;
@@ -68,7 +51,7 @@ class SuffixArray{
 		for(int i=0;i<(int)v.size();i++)rank[v[i]]++;
 		for(int i=1;i<alpha;i++)rank[i]+=rank[i-1];
 			
-		//sorting LMS-substring
+		//sorting LMS-substd::string
 		fill(bucket.begin(),bucket.end(),-1);
 		bool first=true;
 		copy(rank.begin(),rank.end(),c.begin());
@@ -93,8 +76,8 @@ class SuffixArray{
 				if(eq(v,lmsidx[i-1],lmsidx[i],type))lmsord[i]=lmsord[i-1];
 				else lmsord[i]=lmsord[i-1]+1;
 			}
-			if(lmsord.back()+1!=lmsord.size()){
-				vector<int> lmssuffix;
+			if(lmsord.back()+1!=static_cast<int>(lmsord.size())){
+				std::vector<int> lmssuffix;
 				fill(bucket.begin(),bucket.end(),-1);
 				for(int i=0;i<(int)lmsidx.size();i++){
 					if(lmsidx[i])bucket[lmsidx[i]]=lmsord[i];
@@ -106,7 +89,7 @@ class SuffixArray{
 						lmsidx.push_back(i);
 					}
 				}
-				vector<int> lmssa(induced_sorting(lmssuffix,lmsord.back()+1));
+				std::vector<int> lmssa(induced_sorting(lmssuffix,lmsord.back()+1));
 				for(int i=0;i<(int)lmsidx.size();i++){
 					lmsord[i]=lmsidx[lmssa[i]];
 				}
@@ -129,17 +112,17 @@ class SuffixArray{
 	}
 	
 public:
-	SuffixArray(const string &s){
+	SuffixArray(const std::string &s){
 		build(s);
 	}
-	const string& get_text()const{return text;}
-	void build(const string &s){
+	const std::string& get_text()const{return text;}
+	void build(const std::string &s){
 		text=s;
-		vector<int> v(s.size());
+		std::vector<int> v(s.size());
 		for(int i=0;i<(int)s.size();i++)v[i]=s[i]-'a';
 		sa=induced_sorting(v,26);
 	}
-	int lower(string &s)const{
+	int lower(std::string &s)const{
 		int a=-1,b=text.size();
 		while(b-a>1){
 			int c=(a+b)/2;
@@ -148,7 +131,7 @@ public:
 		}
 		return b;
 	}
-	int upper(string &s)const{
+	int upper(std::string &s)const{
 		int a=-1,b=text.size();
 		while(b-a>1){
 			int c=(a+b)/2;
@@ -157,18 +140,7 @@ public:
 		}
 		return b;
 	}
-	string kth_suffix(int k)const{
+	std::string kth_suffix(int k)const{
 		return text.substr(sa[k]);
 	}
 };
-
-
-
-
-int main(){
-	string s("abracadabra");
-	SuffixArray sa(s);
-	for(int i=0;i<s.size();i++){
-		cout<<sa.kth_suffix(i)<<endl;
-	}
- }
