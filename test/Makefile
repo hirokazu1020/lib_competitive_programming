@@ -4,8 +4,10 @@ CXXFLAGS := -g -std=c++20 -O3 -Wall -march=native
 TESTSRC := main.cc $(wildcard */*.cc)
 OBJS := $(TESTSRC:%.cc=build/%.o)
 
+DETECTOR := valgrind --leak-check=full
+
 test: build/test
-	./build/test
+	$(DETECTOR) ./build/test
 
 clean:
 	rm -rf build
