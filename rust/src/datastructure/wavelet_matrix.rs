@@ -1,3 +1,10 @@
+fn pop_select(block: u64, k: usize) -> u64 {
+    unsafe {
+        let y = core::arch::x86_64::_pdep_u64(1u64 << (k - 1), block);
+        core::arch::x86_64::_tzcnt_u64(y)
+    }
+}
+
 struct BitVector {
     len: usize,
     zeros: usize,
@@ -34,6 +41,30 @@ impl BitVector {
     }
     fn zeros(&self) -> usize {
         self.zeros
+    }
+    fn select1(&self, k: usize) -> usize {
+        let (mut lb, mut ub) = (0, self.rank.len());
+        while ub - lb > 1 {
+            let m = (lb + ub) / 2;
+            if k < self.rank[m] {
+                ub = m;
+            } else {
+                lb = m;
+            }
+        }
+        lb * 64 | pop_select(self.bit[lb], k - self.rank[lb]) as usize
+    }
+    fn select0(&self, k: usize) -> usize {
+        let (mut lb, mut ub) = (0, self.rank.len());
+        while ub - lb > 1 {
+            let m = (lb + ub) / 2;
+            if k < m * 64 - self.rank[m] {
+                ub = m;
+            } else {
+                lb = m;
+            }
+        }
+        lb * 64 | pop_select(!self.bit[lb], k - (lb * 64 - self.rank[lb])) as usize
     }
 }
 
@@ -133,8 +164,31 @@ impl WaveletMatrix {
     pub fn rank_range(&self, s: usize, e: usize, l: u64, r: u64) -> usize {
         self.rank_lt(s, e, r) - self.rank_lt(s, e, l)
     }
-    pub fn select(&self, _k: usize, _r: u64) -> usize {
-        unimplemented!("nya-----!");
+    /// k+1番目のvの位置
+    pub fn select(&self, k: usize, v: u64) -> isize {
+        let (mut s, mut e) = (0usize, self.len);
+        for i in (0..self.bit_len).rev() {
+            let (sr, er) = (self.bv[i].rank(s), self.bv[i].rank(e));
+            if Self::is_one(v, i) {
+                s = self.bv[i].zeros() + sr;
+                e = self.bv[i].zeros() + er;
+            } else {
+                s -= sr;
+                e -= er;
+            }
+        }
+        let mut p: usize = s + k;
+        if e <= p {
+            return -1;
+        }
+        for i in 0..self.bit_len {
+            if Self::is_one(v, i) {
+                p = self.bv[i].select1(p - self.bv[i].zeros + 1)
+            } else {
+                p = self.bv[i].select0(p + 1)
+            }
+        }
+        p as isize
     }
     pub fn quantile(&self, s: usize, e: usize, k: usize) -> u64 {
         let (mut s, mut e, mut k) = (s, e, k);
@@ -164,5 +218,10 @@ fn test() {
         vec,
         (0..vec.len()).map(|i| wm.access(i)).collect::<Vec<_>>()
     );
-    assert_eq!(1, wm.rank(2, 6, 7));
+    assert_eq!(0, wm.select(0, 3));
+    assert_eq!(1, wm.select(0, 7));
+    assert_eq!(2, wm.select(0, 2));
+    assert_eq!(3, wm.select(1, 7));
+    assert_eq!(4, wm.select(1, 3));
+    assert_eq!(5, wm.select(0, 8));
 }
