@@ -1,3 +1,3 @@
-test/build
+cpp/test/build
 rust/target
 rust/Cargo.lock

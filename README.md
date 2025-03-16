@@ -23,6 +23,7 @@
         - [Library of Number Theory](https://judge.u-aizu.ac.jp/onlinejudge/finder.jsp?course=NTL)
 - Rust
     - https://moshg.github.io/rust-std-ja/std/
+    - [Rust 競プロ チートシート集](https://zenn.dev/tipstar0125/articles/898cd37c76dce8)
     - AtCoder
         - https://docs.rs/ac-library-rs/latest/ac_library/
         - https://docs.rs/proconio/latest/proconio/

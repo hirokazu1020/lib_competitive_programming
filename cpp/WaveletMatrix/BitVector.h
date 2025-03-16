@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <vector>
 #include <bit>
 #include <nmmintrin.h>
 #include <immintrin.h>
