@@ -1,5 +1,3 @@
-/// static Trie
-
 pub struct Trie {
     begin: Vec<usize>,
     edge: Vec<u8>,

@@ -1,7 +1,9 @@
 //pub mod AVLTree;
 pub mod fenwick_tree;
 //pub mod persistent_array;
+/// 一点更新　範囲取得
 pub mod segtree1;
+/// 範囲更新　一点取得
 pub mod segtree2;
 pub mod treap;
 pub mod union_find;

@@ -1,4 +1,3 @@
-/// 一点更新　範囲クエリ
 // ref: http://codeforces.com/blog/entry/18051
 
 pub struct Segtree<T, E, OP> {

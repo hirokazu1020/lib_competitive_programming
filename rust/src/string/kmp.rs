@@ -1,5 +1,3 @@
-/// KMP法
-
 pub struct KMP<T> {
     pattern: Vec<T>,
     fail: Vec<isize>,
