@@ -114,7 +114,6 @@ impl Combination {
     }
 }
 
-
 #[test]
 fn test_mod() {
     let a = Modint::new(MOD as u64 + 1u64);

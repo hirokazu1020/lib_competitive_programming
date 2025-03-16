@@ -1,3 +1,4 @@
+/// unimplemented
 /*
 実装案
 参照カウンタ

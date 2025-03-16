@@ -22,7 +22,6 @@ pub fn z_algorithm<T: std::cmp::Eq>(s: &[T]) -> Vec<usize> {
     a
 }
 
-
 #[test]
 fn test() {
     let s = b"aaabaaaab".to_vec();

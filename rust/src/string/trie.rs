@@ -1,3 +1,5 @@
+/// static Trie
+
 pub struct Trie {
     begin: Vec<usize>,
     edge: Vec<u8>,
@@ -77,7 +79,10 @@ impl Trie {
         }
         self.contain[node_id]
     }
-    pub fn find_child(&self, node_id: usize, ch: &u8) -> usize {
+    pub fn node_size(&self) -> usize {
+        self.contain.len()
+    }
+    fn find_child(&self, node_id: usize, ch: &u8) -> usize {
         let mut range = self.begin[node_id]..self.begin[node_id + 1];
         if range.len() <= 8 {
             match range.find(|i| self.edge[*i] == *ch) {
@@ -91,11 +96,7 @@ impl Trie {
             }
         }
     }
-    pub fn node_size(&self) -> usize {
-        self.contain.len()
-    }
 }
-
 
 #[test]
 fn test() {

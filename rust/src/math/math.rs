@@ -6,6 +6,7 @@ pub fn gcd(a: u64, b: u64) -> u64 {
     }
 }
 
+/// O(sqrt(n))
 pub fn is_prime(n: u64) -> bool {
     for i in 2.. {
         if n < i * i {
@@ -18,6 +19,7 @@ pub fn is_prime(n: u64) -> bool {
     true
 }
 
+/// O(sqrt(n))
 pub fn prime_factor(mut n: u64) -> Vec<(u64, usize)> {
     let mut res: Vec<(u64, usize)> = vec![];
     let mut i: u64 = 2;
@@ -38,6 +40,7 @@ pub fn prime_factor(mut n: u64) -> Vec<(u64, usize)> {
     res
 }
 
+/// エラトステネスの篩
 pub struct Sieve {
     prime: Vec<usize>,
     is_prime: Vec<bool>,
@@ -80,6 +83,7 @@ impl Sieve {
     pub fn prime(&self) -> &Vec<usize> {
         &self.prime
     }
+    /// O(log(n))
     pub fn prime_factor(&self, mut n: usize) -> Vec<(usize, usize)> {
         let mut res: Vec<(usize, usize)> = vec![];
         let (mut prev, mut cnt) = (self.min_facor[n], 0);
@@ -101,6 +105,7 @@ impl Sieve {
     }
 }
 
+/// O(log(y))
 pub fn pow_mod(mut x: u64, mut y: u64, modv: u64) -> u64 {
     let mut ret: u64 = 1;
     while y > 0 {
@@ -112,7 +117,6 @@ pub fn pow_mod(mut x: u64, mut y: u64, modv: u64) -> u64 {
     }
     ret
 }
-
 
 #[test]
 fn test_is_prime() {

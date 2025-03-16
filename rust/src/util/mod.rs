@@ -1,2 +1,2 @@
-pub mod bitoperation;
-pub mod cpp;
+pub mod bit_operation;
+pub mod cpp_std_algorithm;

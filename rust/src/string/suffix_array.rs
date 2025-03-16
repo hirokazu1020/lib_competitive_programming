@@ -99,7 +99,6 @@ pub mod suffix_array {
     }
 }
 
-
 #[cfg(test)]
 pub fn test_lcp_array(s: &[u8], sa: &Vec<usize>) -> Vec<usize> {
     let mut lcp = Vec::with_capacity(s.len() - 1);

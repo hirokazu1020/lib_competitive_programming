@@ -1,8 +1,17 @@
 # Rust Library
 
-### test
-`cargo fmt`
+- test
+
 `cargo test`
+- formatter
+
+`cargo fmt`
+- document
+
+`cargo doc`
+
+`cargo doc --open`
+
 
 ## datastrucure
 * AVLTree

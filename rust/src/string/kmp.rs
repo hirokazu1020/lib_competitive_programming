@@ -1,3 +1,5 @@
+/// KMP法
+
 pub struct KMP<T> {
     pattern: Vec<T>,
     fail: Vec<isize>,
@@ -41,7 +43,6 @@ impl<T: Copy + std::cmp::Eq> KMP<T> {
         u + 1
     }
 }
-
 
 #[test]
 fn test() {

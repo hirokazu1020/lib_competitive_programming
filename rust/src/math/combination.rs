@@ -1,3 +1,5 @@
+/// nCr
+
 pub struct Combination {
     modv: u64,
     inv: Vec<u64>,

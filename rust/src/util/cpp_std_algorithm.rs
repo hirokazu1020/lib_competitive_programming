@@ -4,6 +4,7 @@
 use std::collections::BTreeSet;
 use std::ops::Bound;
 
+/// std::unique
 pub fn unique<T: std::cmp::Eq>(v: &mut Vec<T>) {
     if v.len() == 0 {
         return;
@@ -20,6 +21,7 @@ pub fn unique<T: std::cmp::Eq>(v: &mut Vec<T>) {
     }
 }
 
+/// std::lower_bound
 pub fn lower_bound<T: std::cmp::Ord>(v: &[T], val: &T) -> usize {
     let mut lb: isize = -1;
     let mut ub: isize = v.len() as isize;
@@ -34,6 +36,7 @@ pub fn lower_bound<T: std::cmp::Ord>(v: &[T], val: &T) -> usize {
     return ub as usize;
 }
 
+/// std::upper_bound
 pub fn upper_bound<T: std::cmp::Ord>(v: &[T], val: &T) -> usize {
     let mut lb: isize = -1;
     let mut ub: isize = v.len() as isize;
@@ -48,10 +51,10 @@ pub fn upper_bound<T: std::cmp::Ord>(v: &[T], val: &T) -> usize {
     return ub as usize;
 }
 
+/// std::set::lower_bound
 pub fn set_lower_bound<'a, T: std::cmp::Ord>(set: &'a BTreeSet<T>, val: &T) -> Option<&'a T> {
     return set.range((Bound::Included(val), Bound::Unbounded)).next();
 }
-
 
 #[test]
 fn test_bound() {

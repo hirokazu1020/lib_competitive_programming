@@ -148,7 +148,6 @@ pub mod treap {
     }
 }
 
-
 #[test]
 fn test() {
     let mut t = treap::Treap::<i32>::new();

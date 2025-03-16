@@ -46,7 +46,6 @@ impl RollingHash {
     }
 }
 
-
 #[test]
 fn test_inv() {
     let base = 17;

@@ -1,5 +1,5 @@
 /// 範囲更新　一点取得
-/// ref: http://codeforces.com/blog/entry/18051
+// ref: http://codeforces.com/blog/entry/18051
 
 pub struct Segtree<T, E, MODI, OP> {
     n: usize,
